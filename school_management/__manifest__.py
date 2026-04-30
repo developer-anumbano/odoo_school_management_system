@@ -9,6 +9,7 @@
         'security/ir.model.access.csv',
         'views/school_views.xml',
     ],
+    'images': ['static/description/icon.png'],
     'installable': True,
     'application': True,
 }

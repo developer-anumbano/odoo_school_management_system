@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- ========== STUDENT VIEWS ========== -->
-    <record id="school_student_list_view" model="ir.ui.view">
-        <field name="name">school.student.list</field>
+    <!-- ================= STUDENT ================= -->
+    <record id="school_student_tree_view" model="ir.ui.view">
+        <field name="name">school.student.tree</field>
         <field name="model">school.student</field>
         <field name="arch" type="xml">
             <list string="Students">
@@ -26,22 +26,32 @@
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
-                    <field name="image" widget="image" class="oe_avatar"/>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+
                     <group>
                         <group>
-                            <field name="name"/>
                             <field name="roll_number"/>
                             <field name="gender"/>
                             <field name="date_of_birth"/>
+                            <field name="classroom_id"/>
                         </group>
                         <group>
-                            <field name="classroom_id"/>
                             <field name="parent_name"/>
                             <field name="parent_phone"/>
                             <field name="address"/>
                         </group>
                     </group>
+
+                    <notebook>
+                        <page string="Photo">
+                            <field name="image" widget="image" class="oe_avatar"/>
+                        </page>
+                    </notebook>
+
                 </sheet>
+
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
                     <field name="message_ids"/>
@@ -50,9 +60,10 @@
         </field>
     </record>
 
-    <!-- ========== TEACHER VIEWS ========== -->
-    <record id="school_teacher_list_view" model="ir.ui.view">
-        <field name="name">school.teacher.list</field>
+
+    <!-- ================= TEACHER ================= -->
+    <record id="school_teacher_tree_view" model="ir.ui.view">
+        <field name="name">school.teacher.tree</field>
         <field name="model">school.teacher</field>
         <field name="arch" type="xml">
             <list string="Teachers">
@@ -74,10 +85,12 @@
                     <field name="state" widget="statusbar"/>
                 </header>
                 <sheet>
-                    <field name="image" widget="image" class="oe_avatar"/>
+                    <h1>
+                        <field name="name"/>
+                    </h1>
+
                     <group>
                         <group>
-                            <field name="name"/>
                             <field name="employee_id"/>
                             <field name="gender"/>
                             <field name="qualification"/>
@@ -90,7 +103,10 @@
                             <field name="salary"/>
                         </group>
                     </group>
+
+                    <field name="image" widget="image" class="oe_avatar"/>
                 </sheet>
+
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
                     <field name="message_ids"/>
@@ -99,9 +115,10 @@
         </field>
     </record>
 
-    <!-- ========== CLASSROOM VIEWS ========== -->
-    <record id="school_classroom_list_view" model="ir.ui.view">
-        <field name="name">school.classroom.list</field>
+
+    <!-- ================= CLASSROOM ================= -->
+    <record id="school_classroom_tree_view" model="ir.ui.view">
+        <field name="name">school.classroom.tree</field>
         <field name="model">school.classroom</field>
         <field name="arch" type="xml">
             <list string="Classes">
@@ -119,12 +136,16 @@
         <field name="arch" type="xml">
             <form string="Classroom">
                 <sheet>
-                    <group>
+                    <h1>
                         <field name="name"/>
+                    </h1>
+
+                    <group>
                         <field name="section"/>
                         <field name="class_teacher_id"/>
                         <field name="total_students"/>
                     </group>
+
                     <notebook>
                         <page string="Students">
                             <field name="student_ids">
@@ -132,19 +153,20 @@
                                     <field name="name"/>
                                     <field name="roll_number"/>
                                     <field name="gender"/>
-                                    <field name="parent_phone"/>
                                 </list>
                             </field>
                         </page>
                     </notebook>
+
                 </sheet>
             </form>
         </field>
     </record>
 
-    <!-- ========== FEE VIEWS ========== -->
-    <record id="school_fee_list_view" model="ir.ui.view">
-        <field name="name">school.fee.list</field>
+
+    <!-- ================= FEE ================= -->
+    <record id="school_fee_tree_view" model="ir.ui.view">
+        <field name="name">school.fee.tree</field>
         <field name="model">school.fee</field>
         <field name="arch" type="xml">
             <list string="Fees">
@@ -165,10 +187,11 @@
                 <header>
                     <button name="action_mark_paid" type="object"
                             string="Mark as Paid"
-                            invisible="state == 'paid'"
-                            class="btn-primary"/>
+                            class="btn-primary"
+                            invisible="state == 'paid'"/>
                     <field name="state" widget="statusbar"/>
                 </header>
+
                 <sheet>
                     <group>
                         <group>
@@ -183,6 +206,7 @@
                         </group>
                     </group>
                 </sheet>
+
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
                     <field name="message_ids"/>
@@ -191,7 +215,8 @@
         </field>
     </record>
 
-    <!-- ========== ACTIONS ========== -->
+
+    <!-- ================= ACTIONS ================= -->
     <record id="school_student_action" model="ir.actions.act_window">
         <field name="name">Students</field>
         <field name="res_model">school.student</field>
@@ -216,10 +241,12 @@
         <field name="view_mode">list,form</field>
     </record>
 
-    <!-- ========== MENUS ========== -->
+
+    <!-- ================= MENUS ================= -->
     <menuitem id="school_main_menu"
-              name="School"
-              sequence="10"/>
+              name="School Management"
+              sequence="10"
+              web_icon="school_management,static/description/icon.png"/>
 
     <menuitem id="school_students_menu"
               name="Students"
